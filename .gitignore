@@ -53,3 +53,8 @@ dkms.conf
 
 # debug information files
 *.dwo
+/.idea**
+/.vscode**
+
+#libs downloads
+/managed_components**

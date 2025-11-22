@@ -1,0 +1,2 @@
+source /home/mpuma/esp/esp-idf/dsp/build/gdbinit/symbols
+source /home/mpuma/esp/esp-idf/dsp/build/gdbinit/connect

@@ -1,0 +1,26 @@
+Command: ninja all
+[1/9] Performing build step for 'bootloader'
+[1/1] cd /home/mpuma/esp/esp-idf/dsp/build/bootloader && /home/mpuma/.espressif/python_env/idf6.0_py3.12_env/bin/python /home/mpuma/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/mpuma/esp/esp-idf/dsp/build/bootloader/bootloader.bin
+Bootloader binary size 0x6680 bytes. 0x980 bytes (8%) free.
+[2/9] No install step for 'bootloader'
+[3/9] Completed 'bootloader'
+[4/9] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/fftLib.c.obj
+/home/mpuma/esp/esp-idf/dsp/main/fftLib.c: In function 'app_main':
+/home/mpuma/esp/esp-idf/dsp/main/fftLib.c:123:40: warning: unused variable 'input_real' [-Wunused-variable]
+  123 |     __attribute__((aligned(16))) float input_real[N_FFT];
+      |                                        ^~~~~~~~~~
+/home/mpuma/esp/esp-idf/dsp/main/fftLib.c: At top level:
+/home/mpuma/esp/esp-idf/dsp/main/fftLib.c:34:20: warning: 'TAG' defined but not used [-Wunused-variable]
+   34 | static const char *TAG = "ADC_FFT";
+      |                    ^~~
+[5/9] Linking C static library esp-idf/main/libmain.a
+[6/9] Generating esp-idf/esp_system/ld/sections.ld
+[7/9] Linking CXX executable dsp.elf
+[8/9] Generating binary image from built executable
+esptool.py v4.10.0
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated /home/mpuma/esp/esp-idf/dsp/build/dsp.bin
+[9/9] cd /home/mpuma/esp/esp-idf/dsp/build && /home/mpuma/.espressif/python_env/idf6.0_py3.12_env/bin/python /home/mpuma/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/mpuma/esp/esp-idf/dsp/build/partition_table/partition-table.bin /home/mpuma/esp/esp-idf/dsp/build/dsp.bin
+dsp.bin binary size 0x316c0 bytes. Smallest app partition is 0x100000 bytes. 0xce940 bytes (81%) free.

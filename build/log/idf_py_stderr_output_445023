@@ -1,0 +1,17 @@
+Command: ninja all
+CMake Error at /home/mpuma/esp/esp-idf/tools/cmake/component.cmake:492 (add_library):
+  Cannot find source file:
+
+    /home/mpuma/esp/esp-idf/dsp/main/filterIIR.c
+Call Stack (most recent call first):
+  main/CMakeLists.txt:1 (idf_component_register)
+
+
+CMake Error at /home/mpuma/esp/esp-idf/tools/cmake/component.cmake:492 (add_library):
+  No SOURCES given to target: __idf_main
+Call Stack (most recent call first):
+  main/CMakeLists.txt:1 (idf_component_register)
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+ninja: error: rebuilding 'build.ninja': subcommand failed
