@@ -113,7 +113,9 @@ void app_main(void)
 
     dac_init();
     continuous_adc_init();
-    init_gpio();
+
+    //descomentar para medir el tiempo de fft
+    //init_gpio();
 
      // Inicializar coeficientes FFT
      dsps_fft2r_init_fc32(NULL, N_FFT);
@@ -142,19 +144,21 @@ void app_main(void)
             }
 
             if(count == (cantSample-1) ) {
-                //ESP_LOGI(TAG, "Initial samples fft:");
-                //print_complex_array(fft_data, cantSample);
+                // COMENTAR LOS LOGS PARA MEDIR EL TIEMPO DE FFT
+                ESP_LOGI(TAG, "Initial samples fft:");
+                print_complex_array(fft_data, cantSample);
 
-                // FFT ESP-DSP
-                gpio_set_level(LED_PIN, 1);
+                //descomentar para medir el tiempo de fft
+                //gpio_set_level(LED_PIN, 1);
 
                 dsps_fft2r_fc32(fft_data, N_FFT);
                 dsps_bit_rev2r_fc32(fft_data, N_FFT);   
 
-                gpio_set_level(LED_PIN, 0);
+                //descomentar para medir el tiempo de fft
+                //gpio_set_level(LED_PIN, 0);
 
-               // ESP_LOGI(TAG, "Result fft:");
-               // print_complex_array(fft_data, cantSample);
+                ESP_LOGI(TAG, "Result fft:");
+                print_complex_array(fft_data, cantSample);
 
                 count = 0;
             } else {

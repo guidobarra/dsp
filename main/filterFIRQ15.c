@@ -24,6 +24,8 @@
 #define ADC_FRECUENCY_HZ            50000
 
 #define DAC_CHAN                    DAC_CHAN_0
+#define LED_PIN GPIO_NUM_2  
+
 
 static adc_channel_t channel[2] = {ADC_CHANNEL_6, ADC_CHANNEL_7};
 dac_oneshot_handle_t DAC_handle;
@@ -80,6 +82,16 @@ void dac_init(void)
     dac_oneshot_new_channel(&dac_config, &DAC_handle);
 }
 
+void init_gpio()
+{
+    // Configurar el GPIO como salida
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL << LED_PIN),
+        .mode = GPIO_MODE_OUTPUT,
+    };
+    gpio_config(&io_conf);
+}
+
 // -------------------- FIR Q15--------------------
 #define FIR_ORDER 6
 
@@ -126,6 +138,10 @@ void app_main(void)
 
     dac_init();
     continuous_adc_init();
+
+    //descomentar para medir el tiempo de fir_filter_q15
+    //init_gpio();
+
     bool isFilterPB = true;
 
     while (1)
@@ -141,8 +157,14 @@ void app_main(void)
             // 1️⃣ Normalizar y aplicar Q15
             int16_t input_sample = (int16_t)((data * 32767) / 4095);
 
+            //descomentar para medir el tiempo de fir_filter_q15
+            //gpio_set_level(LED_PIN, 1);
+
             // 2️⃣ Aplicar FIR
             int16_t filtered_sample = fir_filter_q15(input_sample);
+
+            //descomentar para medir el tiempo de fir_filter_q15
+            //gpio_set_level(LED_PIN, 0);
 
             // ADAPTAR PARA Q15 OJO!
             if (!isFilterPB)

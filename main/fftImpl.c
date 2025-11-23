@@ -25,6 +25,7 @@
 #define ADC_FRECUENCY_HZ            50000
 
 #define DAC_CHAN                    DAC_CHAN_0
+#define LED_PIN GPIO_NUM_2  
 
 static const char *TAG = "ADC_FFT";
 
@@ -81,6 +82,16 @@ void dac_init(void)
         .chan_id = DAC_CHAN,
     };
     dac_oneshot_new_channel(&dac_config, &DAC_handle);
+}
+
+void init_gpio()
+{
+    // Configurar el GPIO como salida
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL << LED_PIN),
+        .mode = GPIO_MODE_OUTPUT,
+    };
+    gpio_config(&io_conf);
 }
 
 // -------------------- IMPLEMENTATION FFT--------------------
@@ -177,6 +188,8 @@ void app_main(void)
 
     dac_init();
     continuous_adc_init();
+    //descomentar para medir el tiempo de la fff
+    //init_gpio();
 
     float input_real[64];
     float input_image[64];
@@ -203,7 +216,14 @@ void app_main(void)
                 ESP_LOGI(TAG, "Initial samples fft:");
                 print_complex_array(input_real, input_image, cantSample);
 
+                //descomentar para medir el tiempo de la fff
+                //gpio_set_level(LED_PIN, 1);
+
                 fft(input_real, input_image, cantSample);
+
+                //descomentar para medir el tiempo de la fff
+                //gpio_set_level(LED_PIN, 0);
+
                 ESP_LOGI(TAG, "Result fft:");
                 print_complex_array(input_real, input_image, cantSample);
 
